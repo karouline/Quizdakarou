@@ -1,97 +1,212 @@
-<!DOCTYPE html><html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Área Secreta 💖</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ffb6c1, #ff69b4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      color: white;
-    }.container {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 30px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz do Amor 💘</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: white;
+  overflow: hidden;
+}
+
+.container {
+  background: rgba(255,255,255,0.15);
+  padding: 25px;
   border-radius: 20px;
   backdrop-filter: blur(10px);
   width: 90%;
   max-width: 400px;
+  text-align: center;
+  transition: 0.4s;
 }
 
-input {
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
+img {
   width: 100%;
+  border-radius: 15px;
   margin-bottom: 15px;
+  max-height: 200px;
+  object-fit: cover;
 }
 
 button {
-  padding: 10px 20px;
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 15px;
   border: none;
-  border-radius: 20px;
-  background-color: white;
+  background: white;
   color: #ff1493;
   font-weight: bold;
   cursor: pointer;
-  margin: 5px;
+  transition: 0.3s;
 }
 
 button:hover {
   transform: scale(1.05);
 }
 
-.hidden {
-  display: none;
+.progress {
+  height: 8px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+  margin-bottom: 15px;
+  overflow: hidden;
 }
 
-  </style>
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: white;
+  transition: 0.4s;
+}
+
+.timer {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+</style>
 </head>
-<body><div class="container" id="login">
-  <h2>Digite nossa senha 💌</h2>
-  <input type="password" id="password" placeholder="Nossa senha...">
-  <button onclick="checkPassword()">Entrar</button>
-</div><div class="container hidden" id="content">
-  <h1>Feliz Dia dos Namorados 💖</h1>
-  <p>Você é o amor da minha vida.</p><button onclick="showMessage()">Nossa História</button> <button onclick="showReasons()">Por que eu te amo</button>
 
-  <p id="extra" style="margin-top:15px;"></p>  <audio id="music" loop>
-    <source src="musica.mp3" type="audio/mpeg">
-  </audio><button onclick="toggleMusic()">Tocar / Pausar Música 🎵</button>
+<body>
 
-</div><script>
-  const correctPassword = "nossoamor"; // MUDE AQUI
+<div class="container">
+  <div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
 
-  function checkPassword() {
-    const input = document.getElementById("password").value;
-    if (input === correctPassword) {
-      document.getElementById("login").classList.add("hidden");
-      document.getElementById("content").classList.remove("hidden");
-    } else {
-      alert("Senha errada 😢");
+  <div class="timer" id="timer"></div>
+  <h2 id="pergunta"></h2>
+  <img id="imagem">
+  <div id="alternativas"></div>
+</div>
+
+<audio id="somAcerto" src="acerto.mp3"></audio>
+<audio id="somErro" src="erro.mp3"></audio>
+
+<script>
+const perguntas = [
+  {
+    pergunta: "Onde foi nosso primeiro encontro? 💕",
+    imagem: "foto1.jpg",
+    respostas: [
+      { texto: "Shopping", correta: false },
+      { texto: "Praça", correta: true },
+      { texto: "Cinema", correta: false },
+      { texto: "Restaurante", correta: false }
+    ]
+  },
+  {
+    pergunta: "Qual minha comida favorita? 🍓",
+    imagem: "foto2.jpg",
+    respostas: [
+      { texto: "Pizza", correta: false },
+      { texto: "Sushi", correta: true },
+      { texto: "Hambúrguer", correta: false },
+      { texto: "Lasanha", correta: false }
+    ]
+  }
+];
+
+let perguntaAtual = 0;
+let pontos = 0;
+let tempo = 10;
+let intervalo;
+
+function iniciarTimer() {
+  tempo = 10;
+  document.getElementById("timer").innerText = "⏳ Tempo: " + tempo;
+
+  intervalo = setInterval(() => {
+    tempo--;
+    document.getElementById("timer").innerText = "⏳ Tempo: " + tempo;
+
+    if (tempo <= 0) {
+      clearInterval(intervalo);
+      perguntaAtual++;
+      if (perguntaAtual < perguntas.length) {
+        mostrarPergunta();
+      } else {
+        mostrarResultado();
+      }
     }
+  }, 1000);
+}
+
+function mostrarPergunta() {
+  clearInterval(intervalo);
+  iniciarTimer();
+
+  const pergunta = perguntas[perguntaAtual];
+  document.getElementById("pergunta").innerText = pergunta.pergunta;
+  document.getElementById("imagem").src = pergunta.imagem;
+
+  document.getElementById("progressBar").style.width =
+    ((perguntaAtual) / perguntas.length) * 100 + "%";
+
+  const alternativas = document.getElementById("alternativas");
+  alternativas.innerHTML = "";
+
+  pergunta.respostas.forEach(resposta => {
+    const botao = document.createElement("button");
+    botao.innerText = resposta.texto;
+
+    botao.onclick = () => {
+      clearInterval(intervalo);
+
+      if (resposta.correta) {
+        pontos++;
+        document.getElementById("somAcerto").play();
+      } else {
+        document.getElementById("somErro").play();
+      }
+
+      perguntaAtual++;
+
+      setTimeout(() => {
+        if (perguntaAtual < perguntas.length) {
+          mostrarPergunta();
+        } else {
+          mostrarResultado();
+        }
+      }, 700);
+    };
+
+    alternativas.appendChild(botao);
+  });
+}
+
+function mostrarResultado() {
+  document.getElementById("progressBar").style.width = "100%";
+
+  let mensagemFinal = "";
+
+  if (pontos === perguntas.length) {
+    mensagemFinal = "🏆 Nível: Namorado Perfeito Absoluto 😭💕";
+  } else if (pontos >= perguntas.length / 2) {
+    mensagemFinal = "💘 Nível: Quase perfeito, mas tá no caminho 😼";
+  } else {
+    mensagemFinal = "😡 Nível: Precisa estudar mais sobre mim!";
   }
 
-  function showMessage() {
-    document.getElementById("extra").innerText = "Desde o dia que te conheci, minha vida ficou mais feliz. Cada momento com você é especial.";
-  }
+  document.querySelector(".container").innerHTML = `
+    <h2>Resultado final 💖</h2>
+    <p>Você acertou ${pontos} de ${perguntas.length}!</p>
+    <p>${mensagemFinal}</p>
+    <button onclick="location.reload()">Jogar de novo 💕</button>
+  `;
+}
 
-  function showReasons() {
-    document.getElementById("extra").innerText = "Eu te amo pelo seu sorriso, pelo seu carinho, pelo seu jeito único e por ser exatamente quem você é.";
-  }
+mostrarPergunta();
+</script>
 
-  function toggleMusic() {
-    const music = document.getElementById("music");
-    if (music.paused) {
-      music.play();
-    } else {
-      music.pause();
-    }
-  }
-</script></body>
+</body>
 </html>
