@@ -153,6 +153,25 @@ function iniciarTimer() {
   }, 1000);
 }
 
+function comecarQuiz() {
+  const input = document.getElementById("nomeUsuario").value.trim();
+
+  if (input === "") {
+    alert("Ei 😡 coloca seu nome primeiro!");
+    return;
+  }
+
+  nomeJogador = input;
+
+  document.getElementById("telaEntrada").style.display = "none";
+  document.getElementById("telaQuiz").style.display = "block";
+
+  document.getElementById("nomeExibido").innerText = 
+    "Jogador: " + nomeJogador + " 💕";
+
+  mostrarPergunta();
+}
+  
 function mostrarPergunta() {
   clearInterval(intervalo);
   iniciarTimer();
@@ -209,13 +228,13 @@ function mostrarResultado() {
     mensagemFinal = "😡 Nível: Precisa estudar mais sobre mim!";
   }
 
-  document.querySelector(".container").innerHTML = `
+  document.getElementById("telaQuiz").innerHTML = `
     <h2>Resultado final 💖</h2>
-    <p>Você acertou ${pontos} de ${perguntas.length}!</p>
+    <h3>${nomeJogador}, você acertou ${pontos} de ${perguntas.length}!</h3>
     <p>${mensagemFinal}</p>
     <button onclick="location.reload()">Jogar de novo 💕</button>
   `;
-}
+        }
 
 mostrarPergunta();
 </script>
