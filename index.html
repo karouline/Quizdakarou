@@ -199,14 +199,19 @@ function mostrarPergunta() {
       clearInterval(intervalo);
 
       if (resposta.correta) {
-        pontos++;
-        const somAcerto = document.getElementById("somAcerto");
-somAcerto.currentTime = 0;
-somAcerto.play().catch(() => {});
-      } else {
-        const somErro = document.getElementById("somErro");
-somErro.currentTime = 0;
-somErro.play().catch(() => {});
+  pontos++;
+
+  const somAcerto = document.getElementById("somAcerto");
+  somAcerto.pause();
+  somAcerto.currentTime = 0;
+  somAcerto.play().catch(() => {});
+
+} else {
+
+  const somErro = document.getElementById("somErro");
+  somErro.pause();
+  somErro.currentTime = 0;
+  somErro.play().catch(() => {});
       }
 
       perguntaAtual++;
