@@ -76,11 +76,13 @@ button:hover {
 </style>
 </head>
 
-<audio id="somAcerto" src="acerto.mp3"></audio>
-<audio id="somErro" src="erro.mp3"></audio>
+
   
 <body>
 
+<audio id="somAcerto" src="acerto.mp3"></audio>
+<audio id="somErro" src="erro.mp3"></audio>
+  
 <!-- TELA DE ENTRADA -->
 <div class="container" id="telaEntrada">
   <h2>Bem-vindo ao Quiz do Amor 💘</h2>
@@ -198,9 +200,13 @@ function mostrarPergunta() {
 
       if (resposta.correta) {
         pontos++;
-        document.getElementById("somAcerto").play();
+        const somAcerto = document.getElementById("somAcerto");
+somAcerto.currentTime = 0;
+somAcerto.play().catch(() => {});
       } else {
-        document.getElementById("somErro").play();
+        const somErro = document.getElementById("somErro");
+somErro.currentTime = 0;
+somErro.play().catch(() => {});
       }
 
       perguntaAtual++;
