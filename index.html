@@ -78,7 +78,20 @@ button:hover {
 
 <body>
 
-<div class="container">
+<!-- TELA DE ENTRADA -->
+<div class="container" id="telaEntrada">
+  <h2>Bem-vindo ao Quiz do Amor 💘</h2>
+  <p>Digite seu nome para começar:</p>
+  <input type="text" id="nomeUsuario" placeholder="Seu nome aqui..." 
+    style="width:100%; padding:10px; border-radius:10px; border:none; margin-bottom:15px;">
+  <button onclick="comecarQuiz()">Começar 💕</button>
+</div>
+
+<!-- TELA DO QUIZ -->
+<div class="container" id="telaQuiz" style="display:none;">
+
+  <h3 id="nomeExibido"></h3>
+
   <div class="progress">
     <div class="progress-bar" id="progressBar"></div>
   </div>
@@ -89,10 +102,9 @@ button:hover {
   <div id="alternativas"></div>
 </div>
 
-<audio id="somAcerto" src="acerto.mp3"></audio>
-<audio id="somErro" src="erro.mp3"></audio>
-
 <script>
+  let nomeJogador = "";
+  
 const perguntas = [
   {
     pergunta: "Onde foi nosso primeiro encontro? 💕",
