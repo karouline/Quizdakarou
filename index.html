@@ -350,6 +350,11 @@ function mostrarPergunta() {
 }
   
 function mostrarResultado() {
+  let botaoFinal = `<button onclick="location.reload()">Jogar de novo 💕</button>`;
+
+if (porcentagem === 100) {
+  botaoFinal = `<button id="botaoFinal" onclick="mostrarQRCode()">Descobrir seu prêmio 🎁</button>`;
+}
   document.getElementById("progressBar").style.width = "100%";
 
   let tituloFinal = "";
@@ -402,14 +407,13 @@ function mostrarResultado() {
 
   }
 
-  document.getElementById("telaQuiz").innerHTML = `
-    <h2>${tituloFinal}</h2>
-    <img src="${imagemFinal}" class="resultado-img">
-    <h3>${nomeJogador}, você acertou ${pontos} de ${perguntas.length} (${porcentagem.toFixed(0)}%)</h3>
-    <p>${mensagemFinal}</p>
-    <button onclick="location.reload()">Jogar de novo 💕</button>
-  `;
-}
+document.getElementById("telaQuiz").innerHTML = `
+  <h2>${tituloFinal}</h2>
+  <img src="${imagemFinal}" class="resultado-img">
+  <h3>${nomeJogador}, você acertou ${pontos} de ${perguntas.length} (${porcentagem.toFixed(0)}%)</h3>
+  <p>${mensagemFinal}</p>
+  ${botaoFinal}
+`;
 
   function soltarConfete() {
   const confete = document.createElement("div");
@@ -430,6 +434,20 @@ function mostrarResultado() {
   }, 2000);
   }
 
+function mostrarQRCode() {
+  const linkDoSeuOutroSite = "https://SEU-LINK-AQUI.com";
+
+  const qrURL = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" 
+                + encodeURIComponent(linkDoSeuOutroSite);
+
+  document.getElementById("telaQuiz").innerHTML = `
+    <h2>Seu prêmio final 💖</h2>
+    <p>Escaneie para desbloquear algo especial...</p>
+    <img src="${qrURL}" style="width:250px; margin:20px auto; display:block; border-radius:15px;">
+    <button onclick="location.reload()">Voltar 💕</button>
+  `;
+}
+    
 </script>
 
 </body>
