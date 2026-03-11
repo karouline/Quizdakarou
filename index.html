@@ -313,23 +313,64 @@ function mostrarPergunta() {
 function mostrarResultado() {
   document.getElementById("progressBar").style.width = "100%";
 
+  let tituloFinal = "";
   let mensagemFinal = "";
+  let imagemFinal = "";
 
-  if (pontos === perguntas.length) {
-    mensagemFinal = "🏆 Nível: Dessa vez você saiu vitorioso do olimpo!";
-  } else if (pontos >= perguntas.length / 2) {
-    mensagemFinal = "💘 Nível: ixi fi, estuda viu 🙄";
-  } else {
-    mensagemFinal = "😡 Nível: ê burrice! Não sabe estudar?";
+  const somVitoria = document.getElementById("somVitoria");
+
+  const porcentagem = (pontos / perguntas.length) * 100;
+
+  // 🏆 100%
+  if (porcentagem === 100) {
+
+    tituloFinal = "VOCÊ CONSEGUIU VENCER DOS DEUSES DO OLIMPO";
+    mensagemFinal = "Você saiu vitorioso... Por enquanto! Vamos ver como você se sai na cama!";
+    imagemFinal = "foto_gabaritou.jpg";
+
+    somVitoria.pause();
+    somVitoria.currentTime = 0;
+    somVitoria.play().catch(()=>{});
+
+    soltarConfete(); // se você já colocou o confete
+
+  }
+
+  // 😡 0%
+  else if (porcentagem === 0) {
+
+    tituloFinal = "😡 COMO ASSIM ZERO???";
+    mensagemFinal = "Você é muito burro não sabe estudar, desista dos seus sonhos!";
+    imagemFinal = "foto_zero.jpg";
+
+  }
+
+  // 💖 61% a 99%
+  else if (porcentagem > 60) {
+
+    tituloFinal = "Que decepção!";
+    mensagemFinal = "Não acredito que você errou tantas! Preste mais atenção!";
+    imagemFinal = "foto_quase_perfeito.jpg";
+
+  }
+
+  // 💕 1% a 60%
+  else {
+
+    tituloFinal = "Burro!";
+    mensagemFinal = "Hummm... Parece que alguém não anda estudando";
+    imagemFinal = "foto_meio.jpg";
+
   }
 
   document.getElementById("telaQuiz").innerHTML = `
-    <h2>Resultado final 💖</h2>
-    <h3>${nomeJogador}, você acertou ${pontos} de ${perguntas.length}!</h3>
+    <h2>${tituloFinal}</h2>
+    <img src="${imagemFinal}" style="width:100%; border-radius:20px; margin-bottom:15px;">
+    <h3>${nomeJogador}, você acertou ${pontos} de ${perguntas.length} (${porcentagem.toFixed(0)}%)</h3>
     <p>${mensagemFinal}</p>
     <button onclick="location.reload()">Jogar de novo 💕</button>
   `;
-        }
+}
 
 </script>
 
