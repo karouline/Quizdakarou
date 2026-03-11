@@ -348,14 +348,11 @@ function mostrarPergunta() {
     alternativas.appendChild(botao);
   });
 }
-  
-function mostrarResultado() {
-  let botaoFinal = `<button onclick="location.reload()">Jogar de novo 💕</button>`;
+  function mostrarResultado() {
 
-if (porcentagem === 100) {
-  botaoFinal = `<button id="botaoFinal" onclick="mostrarQRCode()">Descobrir seu prêmio 🎁</button>`;
-}
   document.getElementById("progressBar").style.width = "100%";
+
+  const porcentagem = (pontos / perguntas.length) * 100;
 
   let tituloFinal = "";
   let mensagemFinal = "";
@@ -363,7 +360,11 @@ if (porcentagem === 100) {
 
   const somVitoria = document.getElementById("somVitoria");
 
-  const porcentagem = (pontos / perguntas.length) * 100;
+  let botaoFinal = `<button onclick="location.reload()">Jogar de novo 💕</button>`;
+
+  if (porcentagem === 100) {
+    botaoFinal = `<button id="botaoFinal" onclick="mostrarQRCode()">Descobrir seu prêmio 🎁</button>`;
+  }
 
   // 🏆 100%
   if (porcentagem === 100) {
@@ -414,7 +415,8 @@ document.getElementById("telaQuiz").innerHTML = `
   <p>${mensagemFinal}</p>
   ${botaoFinal}
 `;
-
+}
+  
   function soltarConfete() {
   const confete = document.createElement("div");
   confete.innerHTML = "🎉🎊✨💖🎉✨🎊";
