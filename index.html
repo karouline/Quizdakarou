@@ -337,6 +337,18 @@ function mostrarPergunta() {
   });
 }
 
+function soltarConfete() {
+  const confete = document.createElement("div");
+  confete.innerHTML = "🎉🎊✨💖🎉✨🎊";
+  confete.style.position = "fixed";
+  confete.style.top = "20%";
+  confete.style.left = "50%";
+  confete.style.transform = "translateX(-50%)";
+  confete.style.fontSize = "30px";
+  confete.style.animation = "piscar 1s infinite";
+  document.body.appendChild(confete);
+        }
+  
 function mostrarResultado() {
   document.getElementById("progressBar").style.width = "100%";
 
