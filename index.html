@@ -84,6 +84,18 @@ button:hover {
   font-size: 14px;
   margin-bottom: 10px;
 }
+
+@keyframes cair {
+  0% {
+    transform: translateY(-100px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(200px);
+    opacity: 0;
+  }
+}
+  
 </style>
 </head>
 
@@ -403,12 +415,19 @@ function mostrarResultado() {
   const confete = document.createElement("div");
   confete.innerHTML = "🎉🎊✨💖🎉✨🎊";
   confete.style.position = "fixed";
-  confete.style.top = "20%";
-  confete.style.left = "50%";
-  confete.style.transform = "translateX(-50%)";
+  confete.style.top = "0";
+  confete.style.left = "0";
+  confete.style.width = "100%";
+  confete.style.textAlign = "center";
   confete.style.fontSize = "30px";
-  confete.style.animation = "piscar 1s infinite";
+  confete.style.pointerEvents = "none";
+  confete.style.animation = "cair 2s ease-out forwards";
+
   document.body.appendChild(confete);
+
+  setTimeout(() => {
+    confete.remove();
+  }, 2000);
   }
 
 </script>
