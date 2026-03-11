@@ -336,18 +336,6 @@ function mostrarPergunta() {
     alternativas.appendChild(botao);
   });
 }
-
-function soltarConfete() {
-  const confete = document.createElement("div");
-  confete.innerHTML = "🎉🎊✨💖🎉✨🎊";
-  confete.style.position = "fixed";
-  confete.style.top = "20%";
-  confete.style.left = "50%";
-  confete.style.transform = "translateX(-50%)";
-  confete.style.fontSize = "30px";
-  confete.style.animation = "piscar 1s infinite";
-  document.body.appendChild(confete);
-        }
   
 function mostrarResultado() {
   document.getElementById("progressBar").style.width = "100%";
@@ -410,6 +398,18 @@ function mostrarResultado() {
     <button onclick="location.reload()">Jogar de novo 💕</button>
   `;
 }
+
+  function soltarConfete() {
+  const confete = document.createElement("div");
+  confete.innerHTML = "🎉🎊✨💖🎉✨🎊";
+  confete.style.position = "fixed";
+  confete.style.top = "20%";
+  confete.style.left = "50%";
+  confete.style.transform = "translateX(-50%)";
+  confete.style.fontSize = "30px";
+  confete.style.animation = "piscar 1s infinite";
+  document.body.appendChild(confete);
+  }
 
 </script>
 
