@@ -18,6 +18,43 @@ body {
   overflow: auto;
 }
 
+.modo-vitoria {
+  background: linear-gradient(135deg, #1a0000, #3b0000, #000000);
+  transition: background 1s ease;
+}
+
+.botao-premio {
+  background: linear-gradient(45deg, #ff0000, #ff4d4d);
+  color: white;
+  font-weight: bold;
+  animation: brilho 1.5s infinite alternate;
+  box-shadow: 0 0 15px rgba(255,0,0,0.7);
+}
+
+.qr-animado {
+  animation: aparecer 0.8s ease forwards;
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+  
+@keyframes brilho {
+  from {
+    transform: scale(1);
+    box-shadow: 0 0 10px red;
+  }
+  to {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px red;
+  }
+}
+  
 .container {
   background: rgba(255,255,255,0.15);
   padding: 25px;
@@ -363,12 +400,12 @@ function mostrarPergunta() {
   let botaoFinal = `<button onclick="location.reload()">Jogar de novo 💕</button>`;
 
   if (porcentagem === 100) {
-    botaoFinal = `<button id="botaoFinal" onclick="mostrarQRCode()">Descobrir seu prêmio 🎁</button>`;
-  }
+    botaoFinal = `<button class="botao-premio" onclick="mostrarQRCode()">🔓 Desbloquear Prêmio Final</button>`;
 
   // 🏆 100%
   if (porcentagem === 100) {
 
+    document.body.classList.add("modo-vitoria");
     tituloFinal = "VOCÊ CONSEGUIU VENCER DOS DEUSES DO OLIMPO";
     mensagemFinal = "Você saiu vitorioso... Por enquanto! Vamos ver como você se sai na cama!";
     imagemFinal = "foto_gabaritou.jpg";
@@ -418,37 +455,36 @@ document.getElementById("telaQuiz").innerHTML = `
 }
   
   function soltarConfete() {
-  const confete = document.createElement("div");
-  confete.innerHTML = "🎉🎊✨💖🎉✨🎊";
-  confete.style.position = "fixed";
-  confete.style.top = "0";
-  confete.style.left = "0";
-  confete.style.width = "100%";
-  confete.style.textAlign = "center";
-  confete.style.fontSize = "30px";
-  confete.style.pointerEvents = "none";
-  confete.style.animation = "cair 2s ease-out forwards";
+  for (let i = 0; i < 20; i++) {
+    const confete = document.createElement("div");
+    confete.innerHTML = "🎉";
+    confete.style.position = "fixed";
+    confete.style.left = Math.random() * 100 + "%";
+    confete.style.top = "-20px";
+    confete.style.fontSize = "20px";
+    confete.style.animation = "cair 2s linear forwards";
+    document.body.appendChild(confete);
 
-  document.body.appendChild(confete);
-
-  setTimeout(() => {
-    confete.remove();
-  }, 2000);
+    setTimeout(() => {
+      confete.remove();
+    }, 2000);
+  }
   }
 
 function mostrarQRCode() {
-  const linkDoSeuOutroSite = "https://sitedomello.vercel.app/";
+  const linkDoSeuOutroSite = "https://SEU-LINK-AQUI.com";
 
   const qrURL = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" 
                 + encodeURIComponent(linkDoSeuOutroSite);
 
   document.getElementById("telaQuiz").innerHTML = `
-    <h2>Seu prêmio final 💖</h2>
-    <p>Escaneie para desbloquear algo especial...</p>
-    <img src="${qrURL}" style="width:250px; margin:20px auto; display:block; border-radius:15px;">
+    <h2 style="color:#ff4d4d;">PRÊMIO DESBLOQUEADO 🔥</h2>
+    <p>Você provou ser digno...</p>
+    <img src="${qrURL}" class="qr-animado" style="width:250px; margin:20px auto; display:block; border-radius:15px;">
     <button onclick="location.reload()">Voltar 💕</button>
   `;
-}
+                          }
+
     
 </script>
 
