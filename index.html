@@ -385,6 +385,7 @@ function mostrarPergunta() {
     alternativas.appendChild(botao);
   });
 }
+  
   function mostrarResultado() {
 
   document.getElementById("progressBar").style.width = "100%";
@@ -394,18 +395,15 @@ function mostrarPergunta() {
   let tituloFinal = "";
   let mensagemFinal = "";
   let imagemFinal = "";
-
-  const somVitoria = document.getElementById("somVitoria");
-
   let botaoFinal = `<button onclick="location.reload()">Jogar de novo 💕</button>`;
 
-  if (porcentagem === 100) {
-    botaoFinal = `<button class="botao-premio" onclick="mostrarQRCode()">🔓 Desbloquear Prêmio Final</button>`;
+  const somVitoria = document.getElementById("somVitoria");
 
   // 🏆 100%
   if (porcentagem === 100) {
 
     document.body.classList.add("modo-vitoria");
+
     tituloFinal = "VOCÊ CONSEGUIU VENCER DOS DEUSES DO OLIMPO";
     mensagemFinal = "Você saiu vitorioso... Por enquanto! Vamos ver como você se sai na cama!";
     imagemFinal = "foto_gabaritou.jpg";
@@ -414,44 +412,39 @@ function mostrarPergunta() {
     somVitoria.currentTime = 0;
     somVitoria.play().catch(()=>{});
 
-    soltarConfete(); // se você já colocou o confete
+    soltarConfete();
 
+    botaoFinal = `<button class="botao-premio" onclick="mostrarQRCode()">🔓 Desbloquear Prêmio Final</button>`;
   }
 
   // 😡 0%
   else if (porcentagem === 0) {
-
     tituloFinal = "😡 COMO ASSIM ZERO???";
     mensagemFinal = "Você é muito burro não sabe estudar, desista dos seus sonhos!";
     imagemFinal = "foto_zero.jpg";
-
   }
 
   // 💖 61% a 99%
   else if (porcentagem > 60) {
-
     tituloFinal = "Eita como estuda 🙄!";
     mensagemFinal = "Não acredito que você errou tantas sendo que é tão inteligente e sabe como estudar!";
     imagemFinal = "foto_quase_perfeito.jpg";
-
   }
 
   // 💕 1% a 60%
   else {
-
     tituloFinal = "Burro!";
     mensagemFinal = "Hummm... Parece que alguém não anda estudando";
     imagemFinal = "foto_meio.jpg";
-
   }
 
-document.getElementById("telaQuiz").innerHTML = `
-  <h2>${tituloFinal}</h2>
-  <img src="${imagemFinal}" class="resultado-img">
-  <h3>${nomeJogador}, você acertou ${pontos} de ${perguntas.length} (${porcentagem.toFixed(0)}%)</h3>
-  <p>${mensagemFinal}</p>
-  ${botaoFinal}
-`;
+  document.getElementById("telaQuiz").innerHTML = `
+    <h2>${tituloFinal}</h2>
+    <img src="${imagemFinal}" class="resultado-img">
+    <h3>${nomeJogador}, você acertou ${pontos} de ${perguntas.length} (${porcentagem.toFixed(0)}%)</h3>
+    <p>${mensagemFinal}</p>
+    ${botaoFinal}
+  `;
 }
   
   function soltarConfete() {
