@@ -132,6 +132,41 @@ button:hover {
     opacity: 0;
   }
 }
+
+/* ====== AJUSTE ESPECIAL PARA CELULAR ====== */
+@media (max-width: 480px) {
+
+  body {
+    align-items: flex-start;
+    padding-top: 40px;
+  }
+
+  .container {
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 30px 20px;
+  }
+
+  .container h1,
+  .container h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+
+  .container p {
+    margin-bottom: 35px;
+    font-size: 16px;
+  }
+
+  .container button {
+    margin: 12px 0;
+    padding: 14px;
+    font-size: 16px;
+  }
+
+}
   
 </style>
 </head>
