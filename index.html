@@ -173,7 +173,7 @@ button:hover {
   
 const perguntas = [
   {
-    pergunta: "qual foi o dia que você tentou concertar meu guarda-chuva?",
+    pergunta: "Qual foi o dia que você tentou concertar meu guarda-chuva?",
     imagem: "foto1.jpg",
     respostas: [
       { texto: "26 de janeiro", correta: false },
@@ -213,38 +213,48 @@ const perguntas = [
     ]
   },
   {
-    pergunta: "Qual cor de camiseta eu usava no dia em que você elogiou meu cabelo recém cortado?",
+    pergunta: "Eu prefiro qual desses doces?",
+    imagem: "foto13.jpg",
+    respostas: [
+      { texto: "Sorvete", correta: false },
+      { texto: "Milkshake", correta: false },
+      { texto: "Chocolate", correta: true },
+      { texto: "Bolo de chocolate", correta: false }
+    ]
+  },
+  {
+    pergunta: "Qual foi o presente que te dei de aniversário no 1°ano?",
     imagem: "foto5.jpg",
     respostas: [
-      { texto: "Verde", correta: true },
-      { texto: "Amarelo", correta: false },
-      { texto: "Azul", correta: false },
-      { texto: "Rosa", correta: false }
+      { texto: "Greninja", correta: true },
+      { texto: "Naruto", correta: false },
+      { texto: "Cartinha e um livro", correta: false },
+      { texto: "Um docinho caseiro", correta: false }
     ]
   },
   {
     pergunta: "Onde estávamos quando a gente deu o primeiro beijo?",
     imagem: "foto6.jpg",
     respostas: [
-      { texto: "Terminal tucuruvi", correta: false },
-      { texto: "Shopping", correta: false },
-      { texto: "Cantinho", correta: true },
+      { texto: "Terminal do tucuruvi", correta: false },
+      { texto: "Shopping tucuruvi", correta: false },
+      { texto: "ETESP", correta: true },
       { texto: "Centro esportivo", correta: false }
     ]
   },
   {
-    pergunta: "O que acha mais engraçado em mim?",
+    pergunta: "O que você fez eu amar mais em mim mesma?",
     imagem: "foto7.jpg",
     respostas: [
       { texto: "Olhos esbugalhados", correta: false },
-      { texto: "Bochechões", correta: true },
+      { texto: "Bochechões", correta: false },
       { texto: "Barriguinha", correta: false },
-      { texto: "Todas as opções acima", correta: false }
+      { texto: "Todas as opções acima", correta: true }
     ]
   },
   
   {
-    pergunta: "Quando começamos a namorar?",
+    pergunta: "Qual foi o dia em que começamos a namorar?",
     imagem: "foto8.jpg",
     respostas: [
       { texto: "12 de dezembro de 2023", correta: false },
@@ -257,10 +267,40 @@ const perguntas = [
     pergunta: "Você ainda me ama?",
     imagem: "foto9.jpg",
     respostas: [
-      { texto: "Sim", correta: false },
-      { texto: "Sim, claro", correta: false },
-      { texto: "Com todinha a certeza do mundo", correta: false },
-      { texto: "nao", correta: true }
+      { texto: "Sim", correta: true },
+      { texto: "Não", correta: false },
+      { texto: "Talvez", correta: false },
+      { texto: "Nunca", correta: false }
+    ]
+  },
+  {
+    pergunta: "Eu prefiro o inverno ou verão?",
+    imagem: "foto11.jpg",
+    respostas: [
+      { texto: "Inverno", correta: true },
+      { texto: "Verão", correta: false },
+      { texto: "As duas estações", correta: false },
+      { texto: "Nenhuma das duas", correta: false }
+    ]
+  },
+  {
+    pergunta: "Minha comida favorita é...",
+    imagem: "foto12.jpg",
+    respostas: [
+      { texto: "Japonesa", correta: false },
+      { texto: "Pizza", correta: false },
+      { texto: "Hambúrguer", correta: true },
+      { texto: "Você", correta: false }
+    ]
+  },
+  {
+    pergunta: "Meu esporte favorito sempre foi:",
+    imagem: "foto13.jpg",
+    respostas: [
+      { texto: "Futebol", correta: false },
+      { texto: "Basquete", correta: false },
+      { texto: "PingPong", correta: false },
+      { texto: "Vôlei", correta: true }
     ]
   },
   {
@@ -319,7 +359,7 @@ function comecarQuiz() {
   const input = document.getElementById("nomeUsuario").value.trim();
 
   if (input === "") {
-    alert("Ei 😡 coloca seu nome primeiro!");
+    alert("Ei 😡 coloca seu nome primeiro, parça!");
     return;
   }
 
@@ -420,21 +460,21 @@ function mostrarPergunta() {
   // 😡 0%
   else if (porcentagem === 0) {
     tituloFinal = "😡 COMO ASSIM ZERO???";
-    mensagemFinal = "Você é muito burro não sabe estudar, desista dos seus sonhos!";
+    mensagemFinal = "Você poderia se esforçar mais... Nunca será bombeiro, desista dos seus sonhos!";
     imagemFinal = "foto_zero.jpg";
   }
 
   // 💖 61% a 99%
   else if (porcentagem > 60) {
     tituloFinal = "Eita como estuda 🙄!";
-    mensagemFinal = "Não acredito que você errou tantas sendo que é tão inteligente e sabe como estudar!";
+    mensagemFinal = "Não acredito que você errou tantas sendo que é tão inteligente 🙄😒!";
     imagemFinal = "foto_quase_perfeito.jpg";
   }
 
   // 💕 1% a 60%
   else {
-    tituloFinal = "Burro!";
-    mensagemFinal = "Hummm... Parece que alguém não anda estudando";
+    tituloFinal = "Perdeu!";
+    mensagemFinal = "Hummm... Parece que alguém não sabe muito sobre mim 🙄😒";
     imagemFinal = "foto_meio.jpg";
   }
 
