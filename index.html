@@ -304,13 +304,13 @@ const perguntas = [
     ]
   },
   {
-    pergunta: "Por fim, a mais difícil: qual das opções abaixo eu tenho mais ciúmes?",
-    imagem: "foto10.jpg",
+    pergunta: "Por fim, a mais difícil: qual das opções abaixo eu vou te dar de aniversário?",
+    imagem: "foto5.jpg",
     respostas: [
-      { texto: "Larissa", correta: false },
-      { texto: "Taly", correta: true },
-      { texto: "Nick", correta: false },
-      { texto: "Todas as opções acima", correta: false }
+      { texto: "Um fusca azul", correta: false },
+      { texto: "Uma cartinha de amor", correta: false },
+      { texto: "Um biscuit de marcelo", correta: false },
+      { texto: "Uma golbox secreta", correta: true }
     ]
   }
 ];
@@ -336,7 +336,7 @@ perguntas.forEach(p => {
 });
   
 function iniciarTimer() {
-  tempo = 10;
+  tempo = 20;
   document.getElementById("timer").innerText = "⏳ Tempo: " + tempo;
 
   intervalo = setInterval(() => {
@@ -444,7 +444,7 @@ function mostrarPergunta() {
 
     document.body.classList.add("modo-vitoria");
 
-    tituloFinal = "VOCÊ CONSEGUIU VENCER DOS DEUSES DO OLIMPO";
+    tituloFinal = "VOCÊ CONSEGUIU!!";
     mensagemFinal = "Você saiu vitorioso... Por enquanto! Vamos ver como você se sai na cama!";
     imagemFinal = "foto_gabaritou.jpg";
 
