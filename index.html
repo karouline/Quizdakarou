@@ -132,21 +132,6 @@ button:hover {
     opacity: 0;
   }
 }
-
-somAcerto.volume = 0.7;
-somErro.volume = 0.7;
-bgMusic.volume = 0;
-bgMusic.play();
-
-let vol = 0;
-const fade = setInterval(() => {
-  if (vol < 0.15) {
-    vol += 0.01;
-    bgMusic.volume = vol;
-  } else {
-    clearInterval(fade);
-  }
-}, 100);
   
 </style>
 </head>
@@ -155,7 +140,7 @@ const fade = setInterval(() => {
   
 <body>
 
-<audio id="bgMusic" src="musica_fundo.mp3" loop></audio>
+<audio id="bgMusic" src="bgMusic.mp3" loop></audio>
 <audio id="somVitoria" src="vitoria.mp3"></audio>
 <audio id="somAcerto" src="acerto.mp3"></audio>
 <audio id="somErro" src="erro.mp3"></audio>
@@ -390,9 +375,27 @@ function comecarQuiz() {
 
   mostrarPergunta();
 
-const bgMusic = document.getElementById("bgMusic");
-bgMusic.volume = 0.15; // bem baixinho 💕
-bgMusic.play().catch(() => {});
+  // 🎧 Áudios
+  const bgMusic = document.getElementById("bgMusic");
+  const somAcerto = document.getElementById("somAcerto");
+  const somErro = document.getElementById("somErro");
+
+  somAcerto.volume = 0.7;
+  somErro.volume = 0.7;
+
+  // fade in fofinho 💖
+  bgMusic.volume = 0;
+  bgMusic.play().catch(() => {});
+
+  let vol = 0;
+  const fade = setInterval(() => {
+    if (vol < 0.15) {
+      vol += 0.01;
+      bgMusic.volume = vol;
+    } else {
+      clearInterval(fade);
+    }
+  }, 100);
 }
   
 function mostrarPergunta() {
