@@ -132,6 +132,21 @@ button:hover {
     opacity: 0;
   }
 }
+
+somAcerto.volume = 0.7;
+somErro.volume = 0.7;
+bgMusic.volume = 0;
+bgMusic.play();
+
+let vol = 0;
+const fade = setInterval(() => {
+  if (vol < 0.15) {
+    vol += 0.01;
+    bgMusic.volume = vol;
+  } else {
+    clearInterval(fade);
+  }
+}, 100);
   
 </style>
 </head>
@@ -140,9 +155,11 @@ button:hover {
   
 <body>
 
+<audio id="bgMusic" src="musica_fundo.mp3" loop></audio>
 <audio id="somVitoria" src="vitoria.mp3"></audio>
 <audio id="somAcerto" src="acerto.mp3"></audio>
 <audio id="somErro" src="erro.mp3"></audio>
+
   
 <!-- TELA DE ENTRADA -->
 <div class="container" id="telaEntrada">
@@ -243,13 +260,13 @@ const perguntas = [
     ]
   },
   {
-    pergunta: "O que você fez eu amar mais em mim mesma?",
+    pergunta: "Na época da escola, qual era nosso DATE mais frequente?",
     imagem: "foto7.jpg",
     respostas: [
-      { texto: "Olhos esbugalhados", correta: false },
-      { texto: "Bochechões", correta: false },
-      { texto: "Barriguinha", correta: false },
-      { texto: "Todas as opções acima", correta: true }
+      { texto: "Popeyes", correta: true },
+      { texto: "Chiquinho", correta: false },
+      { texto: "Sua casinha", correta: false },
+      { texto: "Cinquentinha", correta: false }
     ]
   },
   
@@ -372,6 +389,10 @@ function comecarQuiz() {
     "Jogador: " + nomeJogador + " 💕";
 
   mostrarPergunta();
+
+const bgMusic = document.getElementById("bgMusic");
+bgMusic.volume = 0.15; // bem baixinho 💕
+bgMusic.play().catch(() => {});
 }
   
 function mostrarPergunta() {
